@@ -41,4 +41,22 @@ public class UsuarioService {
 
 		return dao.listar();
 	}
+
+	public void cadastrar(Usuario usuario) {
+		UsuarioDAO dao = new UsuarioDAO(entityManager);
+
+		dao.cadastrar(usuario);
+	}
+
+	public void atualizar(Usuario usuario) {
+		UsuarioDAO dao = new UsuarioDAO(entityManager);
+
+		dao.atualizar(usuario);
+	}
+
+	public void excluir(Long id) throws Exception {
+		UsuarioDAO dao = new UsuarioDAO(entityManager);
+
+		dao.excluir(id);
+	}
 }
