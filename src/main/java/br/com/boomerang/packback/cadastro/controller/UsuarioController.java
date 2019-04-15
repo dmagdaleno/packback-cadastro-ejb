@@ -126,17 +126,6 @@ public class UsuarioController extends HttpServlet {
 
 	}
 
-	private Usuario constroiUsuario(HttpServletRequest req) {
-		Long id = Long.parseLong(req.getParameter("id"));
-		String nome = req.getParameter("nome");
-		String email = req.getParameter("email");
-		String cpf = req.getParameter("cpf");
-		String cnpj = req.getParameter("cnpj");
-		String razaoSocial = req.getParameter("razaoSocial");
-
-		return new UsuarioBuilder().comId(id).comNome(nome).comCpf(cpf).comCnpj(cnpj).comEmail(email).comRazaoSocial(razaoSocial).constroi();
-	}
-
 	private void editar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			Usuario usuario = constroiUsuario(req);
@@ -167,5 +156,16 @@ public class UsuarioController extends HttpServlet {
 		}
 
 		listar(req, resp);
+	}
+
+	private Usuario constroiUsuario(HttpServletRequest req) {
+		Long id = Long.parseLong(req.getParameter("id"));
+		String nome = req.getParameter("nome");
+		String email = req.getParameter("email");
+		String cpf = req.getParameter("cpf");
+		String cnpj = req.getParameter("cnpj");
+		String razaoSocial = req.getParameter("razaoSocial");
+
+		return new UsuarioBuilder().comId(id).comNome(nome).comCpf(cpf).comCnpj(cnpj).comEmail(email).comRazaoSocial(razaoSocial).constroi();
 	}
 }
