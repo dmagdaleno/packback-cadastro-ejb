@@ -1,0 +1,1 @@
+<script src="${pageContext.servletContext.contextPath}/static/bootstrap/js/bootstrap.min.js"></script>
