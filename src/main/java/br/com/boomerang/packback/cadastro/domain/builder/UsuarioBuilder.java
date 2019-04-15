@@ -7,7 +7,8 @@ import br.com.boomerang.packback.cadastro.domain.Endereco;
 import br.com.boomerang.packback.cadastro.domain.Usuario;
 
 public class UsuarioBuilder {
-	
+
+	private Long id = null;
 	private String nome = "Indefinido";
 	private String email = "Indefinido";
 	private String cpf = null;
@@ -15,6 +16,11 @@ public class UsuarioBuilder {
 	private String cnpj = null;
 	private Collection<Endereco> enderecos = Collections.emptyList();
 	
+	public UsuarioBuilder comId(Long id) {
+		this.id = id;
+		return this;
+	}
+
 	public UsuarioBuilder comNome(String nome) {
 		this.nome = nome;
 		return this;
@@ -47,7 +53,12 @@ public class UsuarioBuilder {
 	
 	public Usuario constroi() {
 		Usuario usuario = new Usuario(nome, email, cpf, razaoSocial, cnpj);
+
+		if(id != null && id > 0)
+			usuario.setId(id);
+
 		usuario.setEnderecos(enderecos);
+
 		return usuario;
 	}
 	
