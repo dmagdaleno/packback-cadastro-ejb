@@ -59,7 +59,7 @@ public class UsuarioController extends HttpServlet {
 		} catch (Exception e) {
 			req.setAttribute("erro", "Não foi possível carregar dados para edição.");
 		}
-		req.getRequestDispatcher("templates/edicao/peso.jsp").forward(req, resp);
+		req.getRequestDispatcher("templates/edicao/usuario.jsp").forward(req, resp);
 	}
 
 	private void listar(HttpServletRequest req, HttpServletResponse resp)
@@ -70,7 +70,7 @@ public class UsuarioController extends HttpServlet {
 		} catch (Exception e) {
 			req.setAttribute("erro", "Não foi possível carregar os registros.");
 		}
-		req.getRequestDispatcher("templates/lista/peso.jsp").forward(req, resp);
+		req.getRequestDispatcher("templates/lista/usuario.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class UsuarioController extends HttpServlet {
 		catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("erro", "Não foi possível editar o registro.");
-			req.getRequestDispatcher("templates/edicao/peso.jsp").forward(req, resp);
+			req.getRequestDispatcher("templates/edicao/usuario.jsp").forward(req, resp);
 		}
 	}
 
