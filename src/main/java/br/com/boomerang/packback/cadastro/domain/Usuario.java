@@ -47,7 +47,7 @@ public class Usuario {
 		this.cnpj = cnpj;
 		this.enderecos = new ArrayList<>();
 		
-		if(cnpj != null) {
+		if(cnpj != null && !cnpj.isEmpty()) {
 			this.tipo = TipoUsuario.PRODUTOR;
 		} else {
 			this.tipo = TipoUsuario.CONSUMIDOR;
