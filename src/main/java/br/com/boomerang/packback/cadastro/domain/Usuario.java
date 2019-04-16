@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Usuario {
 
     private String cnpj;
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Endereco> enderecos;
     
     public Usuario() {
@@ -196,7 +197,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", tipo=" + tipo + ", email=" + email + ", nome=" + nome + ", cpf=" + cpf
-				+ ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + ", enderecos=" + enderecos + "]";
+				+ ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + "]";
 	}
 
 
