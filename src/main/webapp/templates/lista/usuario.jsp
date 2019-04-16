@@ -62,11 +62,11 @@
                 </td>
                 
                 <td class="center">
-                  <c:url value="usuarios" var="link">
-                    <c:param name="acao" value="excluir"/>
-                    <c:param name="id" value="${usuario.id}"/>
-                  </c:url>
-                  <a href="${link}" class="btn btn-danger btn-xs" title="Alterar registro">Excluir</a>
+		          <form id="usuarioForm" action="${pageContext.servletContext.contextPath}/usuarios" method="post">
+	          		<input type="hidden" name="acao" value="excluir" />
+	          		<input type="hidden" name="id" value="${usuario.id}" />
+	                <button type="submit" class="btn btn-danger btn-xs">Excluir</button>
+		          </form>
                 </td>
                 
 	          </tr>
@@ -81,33 +81,6 @@
     </div>
 
     <%@ include file="../footer.jsp" %>
-    
-    <div class="modal fade" id="excluirModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	    
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">x</span>
-	        </button>
-	      </div>
-	      
-	      <div class="modal-body">Deseja realmente excluir o usuário?</div>
-	      
-	      <div class="modal-footer">
-	        <form action="usuarios" method="post">
-	          <input type="hidden" name="acao" value="excluir">
-	          <input type="hidden" name="id" id="idExluir">
-	          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	          <button type="submit" class="btn btn-danger">Excluir</button>
-	        </form>
-	      </div>
-	      
-	    </div>
-	  </div>
-	</div>
     
   </body>
 </html>
