@@ -1,6 +1,6 @@
 
-<meta name="description" content="healthtrack page">
-<meta name="author" content="Diego Magdaleno">
+<meta name="description" content="packback page">
+<meta name="author" content="boomerang">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE-edge">
 
