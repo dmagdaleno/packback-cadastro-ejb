@@ -23,13 +23,13 @@ public class UsuarioController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		
-		service = (UsuarioService) req.getSession().getAttribute("service");
+		service = (UsuarioService) req.getSession().getAttribute("usuarioService");
 
 		try {
 			String acao = req.getParameter("acao");
 
-			if(acao == null)
-				throw new IllegalArgumentException("Ação não pode ser nula");
+			if(acao == null || acao.isEmpty())
+				acao = "listar";
 
 			switch (acao) {
 				case "listar":
@@ -52,7 +52,7 @@ public class UsuarioController extends HttpServlet {
 
 	private void abrirFormularioEdicao(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		Long id = Long.parseLong(req.getParameter("id"));
+		Long id = extraiId(req);
 		try {
 			Usuario usuario = service.buscaPor(id);
 			req.setAttribute("usuario", usuario);
@@ -66,9 +66,11 @@ public class UsuarioController extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			Collection<Usuario> usuarios = service.listar();
+			System.out.println(usuarios);
 			req.setAttribute("usuarios", usuarios);
 		} catch (Exception e) {
 			req.setAttribute("erro", "Não foi possível carregar os registros.");
+			e.printStackTrace();
 		}
 		req.getRequestDispatcher("templates/lista/usuario.jsp").forward(req, resp);
 	}
@@ -76,7 +78,7 @@ public class UsuarioController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		service = (UsuarioService) req.getSession().getAttribute("service");
+		service = (UsuarioService) req.getSession().getAttribute("usuarioService");
 
 		try {
 			String acao = req.getParameter("acao");
@@ -112,7 +114,7 @@ public class UsuarioController extends HttpServlet {
 		try {
 
 			Usuario usuario = constroiUsuario(req);
-
+			System.out.println(usuario);
 			service.cadastrar(usuario);
 
 			req.setAttribute("sucesso", "Cadastro realizado com sucesso!");
@@ -144,7 +146,7 @@ public class UsuarioController extends HttpServlet {
 
 	private void excluir(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			Long id = Long.parseLong(req.getParameter("id"));
+			Long id = extraiId(req);
 
 			service.excluir(id);
 
@@ -159,7 +161,7 @@ public class UsuarioController extends HttpServlet {
 	}
 
 	private Usuario constroiUsuario(HttpServletRequest req) {
-		Long id = Long.parseLong(req.getParameter("id"));
+		Long id = extraiId(req);
 		String nome = req.getParameter("nome");
 		String email = req.getParameter("email");
 		String cpf = req.getParameter("cpf");
@@ -167,5 +169,15 @@ public class UsuarioController extends HttpServlet {
 		String razaoSocial = req.getParameter("razaoSocial");
 
 		return new UsuarioBuilder().comId(id).comNome(nome).comCpf(cpf).comCnpj(cnpj).comEmail(email).comRazaoSocial(razaoSocial).constroi();
+	}
+
+	private Long extraiId(HttpServletRequest req) {
+		Long id = null;
+		String paramid = req.getParameter("id");
+		
+		if(paramid != null && !paramid.isEmpty())
+			id = Long.parseLong(paramid);
+		
+		return id;
 	}
 }
