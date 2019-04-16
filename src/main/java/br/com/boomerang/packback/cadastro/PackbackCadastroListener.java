@@ -14,14 +14,6 @@ public class PackbackCadastroListener implements HttpSessionListener {
 			InitialContext ic =  new InitialContext();
 			
 			se.getSession().setAttribute("usuarioService", ic.lookup("java:module/UsuarioService"));
-			
-			se.getSession().setAttribute("historicoService", ic.lookup("java:module/HistoricoPesquisasService"));
-			
-			ContadorPesquisasService contadorService = (ContadorPesquisasService) ic.lookup("java:module/ContadorPesquisasService");
-			
-			contadorService.novoUsuario();
-			
-			se.getSession().setAttribute("contadorService", contadorService);
 			  
 		} catch (NamingException e) {
 		    e.printStackTrace();
@@ -29,8 +21,5 @@ public class PackbackCadastroListener implements HttpSessionListener {
 	}
 	
 	public void sessionDestroyed(HttpSessionEvent se) {
-		ContadorPesquisasService contadorService = (ContadorPesquisasService) se.getSession().getAttribute("contadorService");
-		
-		contadorService.usuarioSaiu();
 	}
 }
