@@ -52,7 +52,7 @@ public class UsuarioBuilder {
 	}
 	
 	public Usuario constroi() {
-		Usuario usuario = new Usuario(nome, email, cpf, razaoSocial, cnpj);
+		Usuario usuario = new Usuario(email, nome, cpf, razaoSocial, cnpj);
 
 		if(id != null && id > 0)
 			usuario.setId(id);
